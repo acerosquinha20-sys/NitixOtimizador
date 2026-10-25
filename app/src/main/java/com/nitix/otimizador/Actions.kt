@@ -138,7 +138,7 @@ object Optimizer {
 
     /** Desfaz tudo que está ligado. */
     fun revert(ctx: Context, pkg: String, log: (String) -> Unit) {
-        for (a in ALL.filter { !it.oneShot && Store.getBool("act_${a.id}") }) {
+        for (a in ALL.filter { !it.oneShot && Store.getBool("act_${it.id}") }) {
             val r = apply(ctx, a, false, pkg)
             if (r == "ok") Store.put("act_${a.id}", false)
             log((if (r == "ok") "↺ " else "✗ ") + a.title + (if (r != "ok") " — $r" else ""))
